@@ -1,0 +1,4 @@
+.container .table .table-head,.container .table .table-row {
+    grid-template-columns: .2fr repeat(4,1fr) .6fr;
+    gap: 10px;
+}

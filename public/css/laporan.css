@@ -1,0 +1,135 @@
+.container .grid {
+    margin-top: 30px;
+    width: 100%;
+    gap: 15px;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(370px,373px));
+}
+
+.chart-section {
+    border-radius: 10px;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,.2);
+    padding: 30px 20px 20px 20px;
+    color: white;
+    background-color: #1f264d;
+    max-width: 373px;
+}
+
+.chart-section p {
+    font-weight: 300;
+    font-size: 13px;
+    color: rgb(174, 174, 174);
+}
+
+.chart-section form button, .chart-section a {
+    padding: 8px;
+    width: 100%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    align-items: center;
+    border-radius: 4px;
+    background-color: #9943ff;
+    color: white;
+    font-size: 14px;
+}
+
+.chart-section form button:focus {
+    outline: none;
+}
+
+.chart-section .chart {
+    margin: 30px 0;
+}
+
+.chart-section .chart.chart-bar,
+.bar-qty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.bar-qty p { width: 15px;text-align: center; }
+
+.bar-qty p:nth-child(1) {
+    color: #a665f6;
+    font-weight: 600;
+}
+
+.chart-section .chart.chart-bar {
+    height: 140px;
+    margin-top: 30px;
+}
+
+.chart-section .chart.chart-load .desc {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.chart-section .chart.chart-load .desc div {
+    flex:1;
+}
+
+.chart-section .chart.chart-load .desc div:nth-child(2) {
+    text-align: right;
+    border-left: 1px solid rgba(136, 136, 136, 0.5);
+}
+
+.chart-section .chart.chart-bar .bar {
+    height: 100%;
+    width: 15px;
+}
+
+.chart-section .chart.chart-load .load-bar {
+    height: 13px;
+}
+
+.chart-section .chart.chart-bar .bar,
+.chart-section .chart.chart-load .load-bar {
+    border-radius: 20px;
+    background-color: #acc4ff69;
+    position: relative;
+    overflow: hidden;
+}
+
+.chart-section .chart.chart-bar .bar div {
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.chart-section .chart.chart-load .load-bar div {
+    left: 0;
+    bottom: 0;
+    top: 0;
+}
+
+.chart-section .chart.chart-bar .bar div,
+.chart-section .chart.chart-load .load-bar div {
+    background-color: #a665f6;
+    border-radius: 20px;
+    position: absolute;
+    transition: all .8s ease-in-out;
+}
+
+.chart-section .chart-list {
+    overflow-y: scroll;
+    max-height: 160px;
+}
+
+.chart-section .chart-list ul li {
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(159, 159, 159, 0.2);
+}
+
+.chart-section .chart-list ul li p:nth-child(1) {
+    font-size: 16px;
+    font-weight: normal;
+    color: white;
+}

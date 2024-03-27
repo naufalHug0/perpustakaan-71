@@ -1,0 +1,1 @@
+toggleDropdown(document.getElementById('login-btn'), document.querySelector('.dropdown'))

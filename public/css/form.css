@@ -1,0 +1,139 @@
+body {
+    background-color: #F1EAFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 80px;
+}
+
+form {
+    padding: 30px 20px;
+    background-color: #27294c;
+    border-radius: 20px;
+    box-shadow: 0 20px 100px 0 #0a0c1a;
+}
+
+form h2 {
+    color: white;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+form input:not(input[type='file']), .upload , form textarea, form .select select {
+    padding: 13px 20px;
+    width: 100%;
+    border-radius: 8px;
+    border: none;
+    margin: 10px 0;
+    background-color: #191933;
+    color: white;
+    transition: .1s;
+}
+form .select {
+    position: relative;
+}
+
+form .select select {
+    appearance: none;
+    cursor: pointer;
+}
+
+form #image-prev {
+    width: max-content;
+    height: max-content;
+    padding: 15px;
+}
+
+form #image-prev img {
+    width: 200px;
+}
+
+.upload {
+    width: 100%;
+    position: relative;
+}
+
+.upload input {
+    width: 100%;
+}
+
+.upload .preview-img, .change-img {
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg,#9943ff, #473eed);
+    color: white;
+    right: 4px;
+    border-radius: 0 4px 4px 0;
+    top: 4px;
+    bottom: 4px;
+    padding: 0 20px;
+    display: none;
+    font-weight: 300;
+    font-size: 12px;
+    position: absolute;
+    background-color: rgb(230, 230, 230);
+    cursor: pointer;
+}
+
+form input::placeholder, form textarea::placeholder, form .select select option[disabled] {
+    color: #7d7d9c;
+}
+
+form input:not(input[type='file']):focus, form textarea:focus, form .select select:focus {
+    outline: 2px solid #9943ff;
+}
+
+form button {
+    padding: 12px 50px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 12px;
+    margin-top: 40px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 10px;
+    background: linear-gradient(45deg,#9943ff, #473eed);
+    color: white;
+    border: none;
+    box-shadow: 0 0 80px 0 #090b176f;
+}
+
+.modal .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.modal .content svg {
+    color: rgb(170, 170, 170);
+}
+
+.modal .content p:nth-child(2) {
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.modal .content p:nth-child(3) {
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.modal footer a {
+    width: 100%;
+    border: 1px solid rgba(159, 159, 159, 0.2);
+    background-color: rgba(159, 159, 159, 0.2);
+    border-radius: 4px;
+    color: white;
+    padding: 5px;
+    cursor: pointer;
+    transition: .15s;
+}
+
+.modal footer button:hover {
+    background-color: #2db348;
+    border-color: rgb(73, 202, 79);
+    color: white;
+}

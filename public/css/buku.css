@@ -1,0 +1,43 @@
+.container .card .upd-btn, 
+.container .card .del-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+}
+
+
+.container .card header .action-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.container .card .img-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.container .card .img-wrapper img {
+    width: 100px;
+    border-radius: 8px;
+}
+.container .card .detail-list {
+    color: white;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-top: 1px solid rgba(136, 136, 136, 0.5);
+}
+
+.container .card .detail-list:hover {
+    background-color: #1d2531;
+}
+
+.container .card header #action-wrapper {
+    right: 30px;
+}

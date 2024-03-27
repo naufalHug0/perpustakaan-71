@@ -1,0 +1,157 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+textarea {
+    resize: none;
+}
+
+#date-placeholder {
+    color: white;
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+.show-dropdown {
+    animation: show .2s ease-in-out forwards;
+}
+
+.hide-dropdown {
+    animation: hide .2s ease-in-out forwards;
+}
+
+.freeze-page {
+    overflow: hidden;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    display: none;
+    bottom: 0;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.modal, form #image-prev {
+    border: 1px solid rgba(136, 136, 136, 0.5);
+    overflow: hidden;
+    background-color: #131d2c;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 101;
+    left: 0;
+    bottom: 0;
+    color: white;
+    width: 400px;
+    height: max-content;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,.2);
+    transform: scale(0);
+    opacity: 0;
+}
+
+.modal header {
+    border-bottom: 1px solid rgba(136, 136, 136, 0.5);
+    color: white;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.modal header .close {
+    border: 1px solid rgba(159, 159, 159, 0.2);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(159, 159, 159, 0.2);
+    color: rgb(166, 166, 166);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal footer {
+    padding: 15px ;
+    border-top: 1px solid rgba(136, 136, 136, 0.5);
+}
+
+.alert {
+    position: fixed;
+    margin: 0 auto;
+    top: -100px;
+    left: 0;
+    right: 0;
+    border-radius: 12px;
+    box-shadow: 0 0 80px 0 rgba(23, 23, 23, 0.326);
+    background-color: white;
+    padding: 16px 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    width: max-content;
+    z-index: 999;
+}
+
+.alert.flash.success svg {
+    color: green;
+}
+.alert.flash.danger svg {
+    color: red;
+}
+
+.float-in {
+    animation: float-in .8s forwards ease-in-out;
+}
+
+.float-out {
+    animation: float-out .8s forwards ease-in-out;
+}
+
+@keyframes show {
+    0% {
+        transform: scale(0.6);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes hide {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.6);
+        opacity: 0;
+    }
+}
+
+@keyframes float-in {
+    0% {top: -100px}
+    100% {top: 20px}
+}
+
+@keyframes float-out {
+    0% {top: 20px}
+    100% {top: -100px}
+}
+
