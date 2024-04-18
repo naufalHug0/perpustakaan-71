@@ -59,6 +59,8 @@ class Admin_Model {
             return false;
         }
 
+        $date = date('Y-m-d H:i:s');
+
         Database::query(
             "INSERT INTO t_admin VALUES (
                 NULL,
@@ -66,7 +68,9 @@ class Admin_Model {
                 '$username',
                 '$password',
                 '$status',
-                '$level'
+                '$level',
+                '$date',
+                '$date'
             )"
         );
 

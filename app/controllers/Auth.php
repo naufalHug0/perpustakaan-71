@@ -10,7 +10,7 @@ class Auth extends Controller {
             return Flasher::setFlash('Username atau password salah', 'danger');
         }
         
-        if ($level == 'admin' && $user[0]['f_status'] == 'Tidak Aktif') {
+        if ($level != 'anggota' && $user[0]['f_status'] == 'Tidak Aktif') {
             return Flasher::setFlash('Akun Tidak Aktif', 'danger');
         }
         

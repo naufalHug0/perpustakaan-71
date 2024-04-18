@@ -2,6 +2,7 @@
 
 class Peminjaman_Model {
     public function all() {
+        $user_id = $_SESSION['u_id'];
         return Database::result_set(
             Database::query(
                 "SELECT 
@@ -20,8 +21,9 @@ class Peminjaman_Model {
                 INNER JOIN t_anggota ON t_peminjaman.f_idanggota = t_anggota.f_id
                 INNER JOIN t_detailbuku ON t_detailpeminjaman.f_iddetailbuku = t_detailbuku.f_id
                 INNER JOIN t_buku ON t_buku.f_id = t_detailbuku.f_idbuku
-                INNER JOIN t_kategori ON t_buku.f_idkategori = t_kategori.f_id
-                ORDER BY t_peminjaman.f_tanggalpeminjaman DESC
+                INNER JOIN t_kategori ON t_buku.f_idkategori = t_kategori.f_id 
+                ". ($_SESSION['u_rl'] == 'pustakawan' ? "WHERE t_peminjaman.f_idadmin = $user_id":'') .
+                " ORDER BY t_peminjaman.f_tanggalpeminjaman DESC
                 "
             )
         );
@@ -180,9 +182,14 @@ class Peminjaman_Model {
     }
 
     public function mostRent() {
+        $user_id = $_SESSION['u_id'];
+
         $total_data = Database::result_set(
             Database::query(
-                "SELECT COUNT(*) as total_data FROM `t_detailpeminjaman`"
+                "SELECT COUNT(*) as total_data FROM `t_detailpeminjaman`
+                INNER JOIN t_peminjaman ON t_detailpeminjaman.f_idpeminjaman = t_peminjaman.f_id
+                "
+                . ($_SESSION['u_rl'] == 'pustakawan' ? "WHERE t_peminjaman.f_idadmin = $user_id ":'')
             )
         )[0]['total_data'];
         
@@ -190,8 +197,10 @@ class Peminjaman_Model {
             Database::query(
                 "SELECT t_buku.f_judul as judul,COUNT(*) as total_rent FROM `t_detailpeminjaman` 
                 INNER JOIN t_detailbuku ON t_detailpeminjaman.f_iddetailbuku = t_detailbuku.f_id
-                INNER JOIN t_buku ON t_buku.f_id = t_detailbuku.f_idbuku
-                GROUP BY f_iddetailbuku ORDER BY total_rent DESC LIMIT 5 OFFSET 0"
+                INNER JOIN t_peminjaman ON t_detailpeminjaman.f_idpeminjaman = t_peminjaman.f_id
+                INNER JOIN t_buku ON t_buku.f_id = t_detailbuku.f_idbuku "
+                . ($_SESSION['u_rl'] == 'pustakawan' ? "WHERE t_peminjaman.f_idadmin = $user_id ":'') .
+                "GROUP BY f_iddetailbuku ORDER BY total_rent DESC LIMIT 5 OFFSET 0"
             )
         );
 
@@ -202,9 +211,14 @@ class Peminjaman_Model {
     }
 
     public function bookReturn () {
+        $user_id = $_SESSION['u_id'];
+
         $total_data = Database::result_set(
             Database::query(
-                "SELECT COUNT(*) as total_data FROM `t_detailpeminjaman`"
+                "SELECT COUNT(*) as total_data FROM `t_detailpeminjaman`
+                INNER JOIN t_peminjaman ON t_detailpeminjaman.f_idpeminjaman = t_peminjaman.f_id
+                "
+                . ($_SESSION['u_rl'] == 'pustakawan' ? "WHERE t_peminjaman.f_idadmin = $user_id ":'')
             )
         )[0]['total_data'];
 
@@ -212,9 +226,11 @@ class Peminjaman_Model {
             Database::query(
                 "SELECT t_buku.f_judul as judul , t_buku.f_pengarang as pengarang , t_buku.f_penerbit as penerbit , COUNT(CASE WHEN t_detailbuku.f_status = 'Tersedia' THEN 1 END) as stok FROM `t_detailpeminjaman` 
                 INNER JOIN t_detailbuku ON t_detailpeminjaman.f_iddetailbuku = t_detailbuku.f_id
+                INNER JOIN t_peminjaman ON t_detailpeminjaman.f_idpeminjaman = t_peminjaman.f_id
                 INNER JOIN t_buku ON t_buku.f_id = t_detailbuku.f_idbuku
-                WHERE t_detailpeminjaman.f_tanggalkembali IS NULL
-                group by t_buku.f_id"
+                WHERE t_detailpeminjaman.f_tanggalkembali IS NULL "
+                . ($_SESSION['u_rl'] == 'pustakawan' ? "AND t_peminjaman.f_idadmin = $user_id ":'') .
+                "group by t_buku.f_id"
             )
         );
 
@@ -222,7 +238,10 @@ class Peminjaman_Model {
             Database::query(
                 "SELECT 
                 count(*) as count
-                FROM `t_detailpeminjaman` WHERE t_detailpeminjaman.f_tanggalkembali IS NOT NULL"
+                FROM `t_detailpeminjaman` 
+                INNER JOIN t_peminjaman ON t_detailpeminjaman.f_idpeminjaman = t_peminjaman.f_id
+                WHERE t_detailpeminjaman.f_tanggalkembali IS NOT NULL "
+                . ($_SESSION['u_rl'] == 'pustakawan' ? "AND t_peminjaman.f_idadmin = $user_id ":'')
             )
         )[0]['count'];
 
@@ -230,7 +249,10 @@ class Peminjaman_Model {
             Database::query(
                 "SELECT 
                 count(*) as count
-                FROM `t_detailpeminjaman` WHERE t_detailpeminjaman.f_tanggalkembali IS NULL"
+                FROM `t_detailpeminjaman` 
+                INNER JOIN t_peminjaman ON t_detailpeminjaman.f_idpeminjaman = t_peminjaman.f_id
+                WHERE t_detailpeminjaman.f_tanggalkembali IS NULL "
+                . ($_SESSION['u_rl'] == 'pustakawan' ? "AND t_peminjaman.f_idadmin = $user_id ":'')
             )
         )[0]['count'];
 
@@ -249,13 +271,16 @@ class Peminjaman_Model {
         //     )
         // )[0]['total_data'];
 
+        $user_id = $_SESSION['u_id'];
+
         $data = Database::result_set(
             Database::query(
                 "SELECT COUNT(*) as total_book, t_anggota.f_nama as nama FROM `t_peminjaman` 
                 INNER JOIN t_anggota ON t_peminjaman.f_idanggota = t_anggota.f_id 
                 INNER JOIN t_detailpeminjaman ON t_peminjaman.f_id = t_detailpeminjaman.f_idpeminjaman
-                WHERE t_detailpeminjaman.f_tanggalkembali IS NULL
-                GROUP BY t_peminjaman.f_idanggota ORDER BY total_book DESC"
+                WHERE t_detailpeminjaman.f_tanggalkembali IS NULL "
+                . ($_SESSION['u_rl'] == 'pustakawan' ? "AND t_peminjaman.f_idadmin = $user_id ":'').
+                "GROUP BY t_peminjaman.f_idanggota ORDER BY total_book DESC"
             )
         );
 
@@ -266,11 +291,14 @@ class Peminjaman_Model {
     }
 
     public function membersWithMostRentBooks () {
+        $user_id = $_SESSION['u_id'];
+
         $data = Database::result_set(
             Database::query(
                 "SELECT COUNT(*) as total_book, t_anggota.f_nama as nama FROM `t_peminjaman` 
-                INNER JOIN t_anggota ON t_peminjaman.f_idanggota = t_anggota.f_id 
-                GROUP BY t_peminjaman.f_idanggota ORDER BY total_book DESC LIMIT 2 OFFSET 0"
+                INNER JOIN t_anggota ON t_peminjaman.f_idanggota = t_anggota.f_id " 
+                . ($_SESSION['u_rl'] == 'pustakawan' ? "WHERE t_peminjaman.f_idadmin = $user_id ":'').
+                "GROUP BY t_peminjaman.f_idanggota ORDER BY total_book DESC LIMIT 2 OFFSET 0"
             )
         );
 

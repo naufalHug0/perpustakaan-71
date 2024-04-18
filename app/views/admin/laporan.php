@@ -6,7 +6,8 @@ $laporan = Laporan::all();
 <div class="grid">
     <div class="chart-section">
         <p>Buku dengan Peminjaman Terbanyak</p>
-        <h1><?= $laporan['most_rent']['data'][0]['judul'] ?></h1>
+        <h1><?= $laporan['most_rent']['data'] ? $laporan['most_rent']['data'][0]['judul'] : 'Belum ada data' ?></h1>
+        <?php if ($laporan['most_rent']['data']) : ?>
         <div class="chart chart-bar">
             <?php foreach ($laporan['most_rent']['data'] as $book) : ?>
                 <div class="bar"><div style="height: <?= round(($book['total_rent'] / $laporan['most_rent']['total_data']) * 100) ?>%"></div></div>
@@ -27,10 +28,12 @@ $laporan = Laporan::all();
                 Cetak
             </button>
         </form>
+        <?php endif; ?>
     </div>
     <div class="chart-section">
         <p>Buku yang Belum Kembali</p>
-        <h1><?= $laporan['book_return']['total_not_returned'] ?> Buku</h1>
+        <h1><?= $laporan['book_return']['data']? ($laporan['book_return']['total_not_returned']." Buku") : 'Belum ada data' ?></h1>
+        <?php if ($laporan['book_return']['data']) : ?>
         <div class="chart chart-load">
             <div class="desc">
                 <div>
@@ -54,10 +57,12 @@ $laporan = Laporan::all();
                 Cetak
             </button>
         </form>
+        <?php endif; ?>
     </div>
     <div class="chart-section">
         <p>Anggota yang Belum Mengembalikan Buku</p>
-        <h1><?= $laporan['members_with_unreturned_books']['total_data'] ?> Anggota</h1>
+        <h1><?= $laporan['members_with_unreturned_books']['data'] ? ($laporan['members_with_unreturned_books']['total_data']."Anggota") : 'Belum ada data' ?> </h1>
+        <?php if ($laporan['members_with_unreturned_books']['data']) : ?>
         <div class="chart chart-list">
             <ul>
                 <?php foreach ($laporan['members_with_unreturned_books']['data'] as $member) : ?>
@@ -78,10 +83,12 @@ $laporan = Laporan::all();
                 Cetak
             </button>
         </form>
+        <?php endif; ?>
     </div>
     <div class="chart-section">
         <p>Anggota yang Sering Meminjam Buku</p>
-        <h1><?= $laporan['members_with_most_rent_books'][0]['nama'] ?></h1>
+        <h1><?= $laporan['members_with_most_rent_books'] ? $laporan['members_with_most_rent_books'][0]['nama'] : 'Belum ada data' ?></h1>
+        <?php if ($laporan['members_with_most_rent_books']) : ?>
         <div class="chart chart-list">
             <ul>
                 <?php foreach ($laporan['members_with_most_rent_books'] as $member) : ?>
@@ -102,5 +109,6 @@ $laporan = Laporan::all();
                 Cetak
             </button>
         </form>
+        <?php endif; ?>
     </div>
 </div>

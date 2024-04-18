@@ -75,5 +75,5 @@ if (isset($_GET['return']) && isset($_GET['id'])) {
         </div>
     <?php endforeach; ?>
 <?php else : ?>
-    <h1>Buku tidak ditemukan</h1>
+    <h1>Belum ada peminjaman</h1>
 <?php endif; ?>
